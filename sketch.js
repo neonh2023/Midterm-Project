@@ -1,11 +1,32 @@
+let crabs = [];
+let lastTime;
+let interval;
+let currentTime;
+
 function setup() 
 {
-  // put setup code here
+  frameRate(20);
+  lastTime = 0;
+  currentTime = 0;
+  interval =500;
+  
   createCanvas(1300,630);
+  c = new Crab(300,20)
 }
  
- function draw() 
- {
+function draw() 
+{
+   currentTime = currentTime + 10;
+   if ((currentTime - lastTime) > interval)
+   {
+     currentTime = 0;
+     //Crabs
+     let velocity = createVector(int(random(-4, 4)), int(random(-4, 4)) );
+     let location = createVector(int(random(100,1200)),int(random(500,600)));
+     crabs.push(new Crab(location, velocity));
+     print (velocity);
+   }
+
    // put drawing code here
    background(255,255,255);
    stroke(0);
@@ -16,17 +37,30 @@ function setup()
   //Sand
    beginShape(); 
    fill(255, 173, 86 );
-   vertex(0, 532);
-   vertex(1300, 532);
+   vertex(0, 470);
+   vertex(1300, 470);
    vertex(1300, 630); 
    vertex(0,630);
    endShape();
  
+  
+  // CRAB
+  for(let i = crabs.length-1; i >=0; i--)
+    {
+      let c = crabs[i]; //pull one out and put in variable
+      c.update();
+      c.display();
+      if(c.isDead())  
+      { // call the method isDead on the object. If we are dead....
+        crabs.splice(i, 1);  //take us out of the array.
+      }
+    }
+
+  
    //Ocean
- 
    fill (226, 104, 104);
    bezier(997,630,576,348,630,485,703,661);
-   
+  
    //top of hat
    fill(255, 162, 162 );
    ellipse(689,307,70,40);
@@ -100,22 +134,24 @@ function setup()
    bezier(2,20,3,27,16,27,18,21);
    pop();
    
-   //Hat
+   //Hat bottom
    push();
-   translate(597, 285);
+   translate(597, 283);
    fill(255, 144, 144 );
    bezier(56,22,5,50,185,44,128,22);
    pop();
    
    
- }
+}
  
- function mousePressed()
+function mousePressed()
  { //eventListeners
   // background(255);
   print("mouseX is: ");
   print(mouseX);
   print(", mouseY is: ");
   print(mouseY);
- 
+
+  
+
  }
