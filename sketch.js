@@ -1,11 +1,18 @@
+//crab
 let crabs = [];
 let lastTime;
-let interval;//crab
-let interval2;//human
-let currentTime;//crab
-let currentTime2;//human
+let interval;
+let currentTime;
+
+//Cloud
+let currentTime2;
+
+//human
 let feetmove;
 let pace;
+
+//cloud
+let clouds = [];
 
 
 function setup() 
@@ -13,39 +20,76 @@ function setup()
   frameRate(20);
   lastTime = 0;
   currentTime = 0;
-  currentTime2 = 0;
   interval =500;
+
+  //Cloud
   interval2=20;
+  currentTime2 =0;
+
   feetmove = 0;
   pace = 1;
   createCanvas(1300,630);
-  
+
 }
  
 function draw() 
 {
-   
-  //Crabs
-   currentTime = currentTime + 10;
-   if ((currentTime - lastTime) > interval)
-   {
-     currentTime = 0;
-     let velocity = createVector(int(random(-4, 4)), int(random(-4, 4)) );
-     let location = createVector(int(random(100,1200)),int(random(500,600)));
-     crabs.push(new Crab(location, velocity));
-     //print (velocity);
-   }
-   
-    // put drawing code here
+   // put drawing code here
    background(255,255,255);
    stroke(0);
    strokeWeight(1);
    line(0, mouseY, width, mouseY);
    line(mouseX, 0, mouseX, height);
+  
+   ///*//Sky
+  beginShape();
+  fill(185, 223, 255);
+  vertex(0,0);
+  vertex(0, 250);
+  vertex(1300, 250);
+  vertex(1300,0);
+  endShape();
+//*/
+  // Cloud
+  currentTime2 = currentTime2 + 1;
+  if (currentTime2  > 100)
+  {
+    currentTime2 = 0;
+    let velocity2 = createVector(-2, 0);
+    let location2= createVector(1500,int(random(0, 250)));
+    clouds.push(new cloud(location2, velocity2));
+    //print (velocity);
+  }
+
+  for(let i = clouds.length-1; i >=0; i--)
+    {
+      let cd = clouds[i]; //pull one out and put in variable
+      cd.update();
+      cd.display();
+      if(cd.outofScreen())  
+      { // call the method isDead on the object. If we are dead....
+        clouds.splice(i, 1);  //take us out of the array.
+      }
+    }
+    stroke(0);
+    strokeWeight(1);
+
+  //Ocean
+  beginShape();
+  fill(42, 122, 189);
+  vertex(0,250);
+  vertex(0, 480);
+  vertex(1300, 480);
+  vertex(1300,250);
+  endShape();
+  
+  //Dolphin
  
+
+   
   //Sand
    beginShape(); 
-   fill(255, 173, 86 );
+   fill(255, 173, 86);
    vertex(0, 470);
    vertex(1300, 470);
    vertex(1300, 630); 
@@ -53,7 +97,19 @@ function draw()
    endShape();
  
   
-  // CRAB
+ 
+  //Crabs
+  currentTime = currentTime + 10;
+  if ((currentTime - lastTime) > interval)
+  {
+    currentTime = 0;
+    let velocity = createVector(int(random(-4, 4)), int(random(-4, 4)) );
+    let location = createVector(int(random(100,1200)),int(random(550,600)));
+    crabs.push(new Crab(location, velocity));
+    //print (velocity);
+  }
+  
+
   for(let i = crabs.length-1; i >=0; i--)
     {
       let c = crabs[i]; //pull one out and put in variable
@@ -73,14 +129,14 @@ function draw()
     //human
       let h = new human(feetmove, feetmove); 
       feetmove = feetmove + pace;
-      currentTime2 = currentTime2 + 1;
-      if ((currentTime2 - lastTime) > interval2) //human
+      //currentTime2 = currentTime2 + 1;
+      if (feetmove > 15 || feetmove <= 0) //human
         {
-          currentTime2 = 0;
+         // currentTime2 = 0;
           pace = pace * -1;
-          h.feet();
         }
       h.display();
+
    
 }
  
@@ -91,7 +147,4 @@ function mousePressed()
   print(mouseX);
   print(", mouseY is: ");
   print(mouseY);
-
-  
-
  }

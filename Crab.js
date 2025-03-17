@@ -58,7 +58,7 @@ class Crab
         this.lifespan -= 1;
     }
     
-      isDead()
+    isDead()
     {
         if(this.location.y <510)
         {

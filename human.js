@@ -3,7 +3,7 @@ class human
     constructor(x,y)
     {
         this.x = x;
-        this.y = y;
+        this.y = y/2;
     }
     display()
     {  //top of hat
@@ -32,10 +32,10 @@ class human
         beginShape();    // Left FOOT
         vertex(660, 473);
         vertex(621, 478);
-        vertex(606+this.x, 566+this.y); //moving
-        vertex(589+this.x, 573+this.y);
-        vertex(591+this.x, 581+this.y);
-        vertex(615+this.x, 573+this.y); // moving
+        vertex(606+this.x, 566+(this.y/2)); //moving
+        vertex(589+this.x, 573+(this.y/2));
+        vertex(591+this.x, 581+(this.y/2));
+        vertex(615+this.x, 573+(this.y/2)); // moving
         vertex(628, 486);
         vertex(660, 483);
         endShape();
@@ -86,7 +86,7 @@ class human
         bezier(56,22,5,50,185,44,128,22);
         pop();
     }
-
+/*
     feet()
     { 
         this.x = this.x * -1;
