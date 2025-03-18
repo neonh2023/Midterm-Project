@@ -10,6 +10,8 @@ let currentTime2;
 //human
 let feetmove;
 let pace;
+let rate;
+let breath;
 
 //cloud
 let clouds = [];
@@ -23,12 +25,16 @@ function setup()
   interval =500;
 
   //Cloud
-  interval2=20;
   currentTime2 =0;
+  
 
   feetmove = 0;
   pace = 1;
+  rate = 1
+  breath = 1;
   createCanvas(1300,630);
+
+  //let h = new human(feetmove, feetmove);
 
 }
  
@@ -41,7 +47,7 @@ function draw()
    line(0, mouseY, width, mouseY);
    line(mouseX, 0, mouseX, height);
   
-   ///*//Sky
+   //Sky
   beginShape();
   fill(185, 223, 255);
   vertex(0,0);
@@ -49,17 +55,18 @@ function draw()
   vertex(1300, 250);
   vertex(1300,0);
   endShape();
-//*/
+
   // Cloud
   currentTime2 = currentTime2 + 1;
-  if (currentTime2  > 100)
+  if (currentTime2 > 60)
   {
     currentTime2 = 0;
-    let velocity2 = createVector(-2, 0);
+    let velocity2 = createVector(-3, 0);
     let location2= createVector(1500,int(random(0, 250)));
     clouds.push(new cloud(location2, velocity2));
-    //print (velocity);
+    
   }
+
 
   for(let i = clouds.length-1; i >=0; i--)
     {
@@ -67,10 +74,11 @@ function draw()
       cd.update();
       cd.display();
       if(cd.outofScreen())  
-      { // call the method isDead on the object. If we are dead....
+      { 
         clouds.splice(i, 1);  //take us out of the array.
       }
     }
+
     stroke(0);
     strokeWeight(1);
 
@@ -112,12 +120,12 @@ function draw()
 
   for(let i = crabs.length-1; i >=0; i--)
     {
-      let c = crabs[i]; //pull one out and put in variable
+      let c = crabs[i]; 
       c.update();
       c.display();
       if(c.isDead())  
-      { // call the method isDead on the object. If we are dead....
-        crabs.splice(i, 1);  //take us out of the array.
+      { 
+        crabs.splice(i, 1);  
       }
     }
 
@@ -127,24 +135,33 @@ function draw()
     bezier(997,630,576,348,630,485,703,661);
   
     //human
-      let h = new human(feetmove, feetmove); 
+      let h = new human(feetmove, feetmove, breath); 
       feetmove = feetmove + pace;
-      //currentTime2 = currentTime2 + 1;
+      
       if (feetmove > 15 || feetmove <= 0) //human
         {
-         // currentTime2 = 0;
           pace = pace * -1;
         }
-      h.display();
 
+      breath = breath + rate/3;
+    
+      if ((breath > 15 || breath <= 0)) //human
+        {
+          rate = rate * -1;
+        }
+
+      h.display();
    
 }
  
 function mousePressed()
- { //eventListeners
-  // background(255);
+ { 
+  
   print("mouseX is: ");
   print(mouseX);
   print(", mouseY is: ");
   print(mouseY);
+   
+  
+   //h.breadth();
  }

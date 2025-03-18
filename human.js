@@ -1,45 +1,39 @@
 class human
 {
-    constructor(x,y)
+    constructor(x,y,b)
     {
         this.x = x;
         this.y = y/2;
+        this.b = 40 + b;
     }
+
     display()
-    {  //top of hat
+    {  
+        //top of hat
         fill(255, 162, 162 );
         ellipse(689,307,70,40);
         
         fill(204, 216, 30);        //head
         ellipse(690,358, 100,100);
         
-        
-        fill(138, 138, 138 ); //BODY
-        beginShape();
-        vertex(659, 397);
-        vertex(660, 493);
-        vertex(752, 496);
-        vertex(735, 430);
-        vertex(705, 397);
-        endShape();
-        
-        //hair
-        fill(204, 216, 30);
-        ellipse(724,395,30,30);
-        
-        
         fill(204, 216, 30);
         beginShape();    // Left FOOT
-        vertex(660, 473);
+        vertex(673, 470);
         vertex(621, 478);
         vertex(606+this.x, 566+(this.y/2)); //moving
         vertex(589+this.x, 573+(this.y/2));
         vertex(591+this.x, 581+(this.y/2));
         vertex(615+this.x, 573+(this.y/2)); // moving
         vertex(628, 486);
-        vertex(660, 483);
+        vertex(673, 483);
         endShape();
+    
         
+       fill(138, 138, 138 ); //BODY
+       ellipse(690,447,this.b,80);
+        
+     
+        fill(204, 216, 30); 
         beginShape();    // Right FOOT
         vertex(680, 473);
         vertex(640, 478);
@@ -87,6 +81,12 @@ class human
         pop();
     }
 /*
+    breath()
+    {
+        
+        
+    }
+/*
     feet()
     { 
         this.x = this.x * -1;
@@ -94,4 +94,5 @@ class human
     }
 //*/
 
+    
 }

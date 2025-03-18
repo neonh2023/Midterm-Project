@@ -30,7 +30,7 @@ class cloud
 
     outofScreen()
     {
-        if (this.location.x < 0)
+        if (this.location.x < -200)
         {
             return true;
         }
