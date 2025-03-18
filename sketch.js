@@ -1,17 +1,12 @@
 //crab
 let crabs = [];
-let lastTime;
-let interval;
-let currentTime;
+let lastTime, currentTime, interval;
 
 //Cloud
 let currentTime2;
 
 //human
-let feetmove;
-let pace;
-let rate;
-let breath;
+let feetmove, pace, rate, breath;
 
 //cloud
 let clouds = [];
@@ -48,40 +43,34 @@ function draw()
    line(mouseX, 0, mouseX, height);
   
    //Sky
-  beginShape();
   fill(185, 223, 255);
-  vertex(0,0);
-  vertex(0, 250);
-  vertex(1300, 250);
-  vertex(1300,0);
-  endShape();
-
+  rect(0,0,width,250);
+  
+///*
   // Cloud
-  currentTime2 = currentTime2 + 1;
-  if (currentTime2 > 60)
+  currentTime2++;
+  if (currentTime2 > 60) 
   {
     currentTime2 = 0;
-    let velocity2 = createVector(-3, 0);
-    let location2= createVector(1500,int(random(0, 250)));
-    clouds.push(new cloud(location2, velocity2));
-    
+    let velocity = createVector(-2, 0);
+    let location = createVector(1300, int(random(0, 250)));
+    clouds.push(new Cloud(location, velocity));
   }
 
-
-  for(let i = clouds.length-1; i >=0; i--)
+  for (let i = clouds.length - 1; i >= 0; i--) 
+  {
+    let cloud = clouds[i];
+    cloud.update();
+    cloud.display();
+    if (cloud.outofScreen())
     {
-      let cd = clouds[i]; //pull one out and put in variable
-      cd.update();
-      cd.display();
-      if(cd.outofScreen())  
-      { 
-        clouds.splice(i, 1);  //take us out of the array.
-      }
+      clouds.splice(i, 1);
     }
+  }
 
     stroke(0);
     strokeWeight(1);
-
+//*/
   //Ocean
   beginShape();
   fill(42, 122, 189);
@@ -94,7 +83,6 @@ function draw()
   //Dolphin
  
 
-   
   //Sand
    beginShape(); 
    fill(255, 173, 86);
@@ -161,7 +149,14 @@ function mousePressed()
   print(mouseX);
   print(", mouseY is: ");
   print(mouseY);
-   
+
+  for (let cloud of clouds)
+  {
+    if (cloud.isClicked(mouseX, mouseY)) 
+      {
+        cloud.smileAndOscillate();
+      }
+  }
   
-   //h.breadth();
  }
+

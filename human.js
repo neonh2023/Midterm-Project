@@ -27,11 +27,13 @@ class human
         vertex(628, 486);
         vertex(673, 483);
         endShape();
-    
+
         
        fill(138, 138, 138 ); //BODY
        ellipse(690,447,this.b,80);
         
+       fill(204, 216, 30);
+       rect(690,431, 10,50);
      
         fill(204, 216, 30); 
         beginShape();    // Right FOOT
