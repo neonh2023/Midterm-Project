@@ -33,7 +33,7 @@ class human
        ellipse(690,447,this.b,80);
         
        fill(204, 216, 30);
-       rect(690,431, 10,50);
+       rect(690,431, 10,50); // arm
      
         fill(204, 216, 30); 
         beginShape();    // Right FOOT
@@ -82,19 +82,5 @@ class human
         bezier(56,22,5,50,185,44,128,22);
         pop();
     }
-/*
-    breath()
-    {
-        
-        
-    }
-/*
-    feet()
-    { 
-        this.x = this.x * -1;
-        this.y = this.y * -1;
-    }
-//*/
-
     
 }

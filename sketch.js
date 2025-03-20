@@ -11,6 +11,11 @@ let feetmove, pace, rate, breath;
 //cloud
 let clouds = [];
 
+//sky
+let isDay = true;
+let sun = 100; let moon = 100;
+let skyColor;
+
 
 function setup() 
 {
@@ -29,27 +34,60 @@ function setup()
   breath = 1;
   createCanvas(1300,630);
 
-  //let h = new human(feetmove, feetmove);
-
+  //sky
+  skyColor = color(185,223,255);
 }
  
 function draw() 
 {
+  //sky , moon, and sun
+  if(isDay)
+  {
+    skyColor = lerpColor(skyColor, color(185,223,255),0.02);
+  }
+  else
+  {
+    skyColor = lerpColor(skyColor, color(20,20,60),0.02);
+  }
+
+  background(skyColor);
+
+  if(isDay)
+  {
+    fill(255,204,0);
+    ellipse(sun , 100,60,60);
+    sun+= 1;
+    if (sun > width)
+    {
+      isDay = false;
+      sun = -50;
+    }
+  }
+  else
+  {
+    fill(200,200,230);
+    ellipse(moon,100, 50,50);
+    moon+=1;
+    if (moon>width)
+    {
+      isDay = true;
+      moon = -50;
+    }
+  }
+
+
    // put drawing code here
-   background(255,255,255);
+   
    stroke(0);
    strokeWeight(1);
    line(0, mouseY, width, mouseY);
    line(mouseX, 0, mouseX, height);
   
-   //Sky
-  fill(185, 223, 255);
-  rect(0,0,width,250);
   
 ///*
   // Cloud
   currentTime2++;
-  if (currentTime2 > 60) 
+  if (currentTime2 > 150) 
   {
     currentTime2 = 0;
     let velocity = createVector(-2, 0);
@@ -70,6 +108,7 @@ function draw()
 
     stroke(0);
     strokeWeight(1);
+    
 //*/
   //Ocean
   beginShape();
