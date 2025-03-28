@@ -13,12 +13,18 @@ let clouds = [];
 
 //sky
 let isDay = true;
-let sun = 100; let moon = 100;
+let sun = -50; let moon = -50;
 let skyColor;
+
+//wave
+let waveMove = 0;
+
+
 
 
 function setup() 
 {
+
   frameRate(20);
   lastTime = 0;
   currentTime = 0;
@@ -36,6 +42,8 @@ function setup()
 
   //sky
   skyColor = color(185,223,255);
+
+
 }
  
 function draw() 
@@ -57,7 +65,7 @@ function draw()
     fill(255,204,0);
     ellipse(sun , 100,60,60);
     sun+= 1;
-    if (sun > width)
+    if (sun > width+50)
     {
       isDay = false;
       sun = -50;
@@ -68,7 +76,7 @@ function draw()
     fill(200,200,230);
     ellipse(moon,100, 50,50);
     moon+=1;
-    if (moon>width)
+    if (moon>width+50)
     {
       isDay = true;
       moon = -50;
@@ -83,8 +91,7 @@ function draw()
    line(0, mouseY, width, mouseY);
    line(mouseX, 0, mouseX, height);
   
-  
-///*
+
   // Cloud
   currentTime2++;
   if (currentTime2 > 150) 
@@ -108,8 +115,7 @@ function draw()
 
     stroke(0);
     strokeWeight(1);
-    
-//*/
+
   //Ocean
   beginShape();
   fill(42, 122, 189);
@@ -119,8 +125,10 @@ function draw()
   vertex(1300,250);
   endShape();
   
-  //Dolphin
- 
+  //wave
+  Waves();
+
+  stroke(0,0,0);
 
   //Sand
    beginShape(); 
@@ -131,7 +139,6 @@ function draw()
    vertex(0,630);
    endShape();
  
-  
  
   //Crabs
   currentTime = currentTime + 10;
@@ -178,9 +185,29 @@ function draw()
         }
 
       h.display();
-   
+
+  
 }
- 
+
+function Waves()
+{
+  fill (43,162, 255);
+  stroke(255, 255,255);
+  strokeWeight(2);
+  waveMove += 0.05;
+
+  for (let y =260; y <height; y += 20) 
+  {
+      beginShape();
+      for (let x = 0; x <= width; x += 20) 
+      {
+        let waveHeight =sin((x * 0.05)+waveMove) * 10;
+        vertex(x, y + waveHeight);
+      }
+      endShape();
+  }
+}
+
 function mousePressed()
  { 
   
