@@ -19,13 +19,16 @@ let skyColor;
 //wave
 let waveMove = 0;
 
+//Stars
+let stars = [];
+
 
 
 
 function setup() 
 {
 
-  frameRate(20);
+  frameRate(400);
   lastTime = 0;
   currentTime = 0;
   interval =500;
@@ -42,6 +45,15 @@ function setup()
 
   //sky
   skyColor = color(185,223,255);
+
+  //Stars
+	for (let i = 0; i < 100; i++)
+		{
+			 let x = random(0,width);
+			 let y = random(0,250);
+			 let brightness = random(150,250);
+			 stars.push({x,y,brightness});	
+		}
 
 
 }
@@ -73,6 +85,8 @@ function draw()
   }
   else
   {
+    drawStars(); //stars
+    
     fill(200,200,230);
     ellipse(moon,100, 50,50);
     moon+=1;
@@ -81,6 +95,7 @@ function draw()
       isDay = true;
       moon = -50;
     }
+    
   }
 
 
@@ -187,6 +202,18 @@ function draw()
       h.display();
 
   
+}
+
+
+function drawStars()
+{
+	noStroke();
+	for(let star of stars)
+		{
+			fill(255,255,255,star.brightness);
+			ellipse(star.x, star.y, 2,2);
+			star.brightness = random(150,255); //Twinkling
+		}
 }
 
 function Waves()
