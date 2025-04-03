@@ -22,16 +22,17 @@ let waveMove = 0;
 //Stars
 let stars = [];
 
-
+//Snowflakes
+let snow = [];
 
 
 function setup() 
 {
 
-  frameRate(400);
+  frameRate(30);
   lastTime = 0;
   currentTime = 0;
-  interval =500;
+  interval =1000;
 
   //Cloud
   currentTime2 =0;
@@ -201,8 +202,39 @@ function draw()
 
       h.display();
 
+      updateSnowfall();
+      drawSnow();
   
 }
+
+
+function updateSnowfall()
+{
+  if (frameCount % 10 == 0)
+  {
+    snow.push(new snowflakes(random(width),0));
+  }
+
+  for(let i = snow.length-1; i>= 0 ; i--)
+  {
+     let s = snow[i];
+     s.update();
+
+    if (s.outofbound())
+    {
+      snow.splice(i,1);
+    }
+  }
+}
+
+function drawSnow()
+{
+   for(let s of snow)
+   {
+      s.display();
+   }
+}
+
 
 
 function drawStars()

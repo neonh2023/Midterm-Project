@@ -6,8 +6,8 @@ class Cloud
       this.velocity = v;
       this.oscillating = false;
       this.oscillationTime = 0;
-      this.blinking = false;
-      this.blinkTime = 0;
+     //this.blinking = false;
+     //this.blinkTime = 0;
     }
 
     display()
@@ -24,7 +24,7 @@ class Cloud
         ellipse(266,75,30,30);
         ellipse(280,88,20,20);
         
-        // Eyes
+        /*// Eyes
         fill(0);
         if (this.blinking) // rectangle eye
         {
@@ -47,7 +47,9 @@ class Cloud
           noFill();
           bezier(220, 80, 225, 90, 235, 90, 240, 80);
         }
+          */
         pop();
+        
       }
     
 
@@ -63,9 +65,10 @@ class Cloud
           {
             this.oscillating = false;
             this.oscillationTime = 0;
-            this.blinking = false;
+           // this.blinking = false;
           }
         }
+       /* 
         if (this.blinking) 
         {
             this.blinkTime++;
@@ -75,6 +78,8 @@ class Cloud
               this.blinkTime = 0;
             }
         }
+            */
+            
       }
 
 
@@ -88,8 +93,8 @@ class Cloud
     {
         this.oscillating = true;
         this.oscillationTime = 0;
-        this.blinking = true;
-        this.blinkTime = 0;
+       // this.blinking = true;
+       // this.blinkTime = 0;
     }
 
     outofScreen()
