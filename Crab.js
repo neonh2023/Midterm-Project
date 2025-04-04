@@ -53,9 +53,12 @@ class Crab
     }
 
     update()
-    { // update my variables within the object
-        this.location.add(this.velocity);
-        this.lifespan -= 1;
+    { 
+      let direction = createVector(mouseX, mouseY).sub(this.location); 
+      direction.setMag(2);
+      this.velocity = direction;
+      this.location.add(this.velocity);
+      this.lifespan -= 1;
     }
     
     isDead()

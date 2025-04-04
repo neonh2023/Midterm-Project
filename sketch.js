@@ -102,20 +102,21 @@ function draw()
 
    // put drawing code here
    
-   stroke(0);
-   strokeWeight(1);
-   line(0, mouseY, width, mouseY);
-   line(mouseX, 0, mouseX, height);
+   //stroke(0);
+   //strokeWeight(1);
+  // line(0, mouseY, width, mouseY);
+   //line(mouseX, 0, mouseX, height);
   
 
   // Cloud
   currentTime2++;
-  if (currentTime2 > 150) 
+  if (currentTime2 > 70) 
   {
     currentTime2 = 0;
-    let velocity = createVector(-2, 0);
+    let velocity = createVector(int(random(-1,-3)), 0);
     let location = createVector(1300, int(random(0, 250)));
-    clouds.push(new Cloud(location, velocity));
+    let o = int(random(1,4));
+    clouds.push(new Cloud(location, velocity, o));
   }
 
   for (let i = clouds.length - 1; i >= 0; i--) 
@@ -270,10 +271,6 @@ function Waves()
 function mousePressed()
  { 
   
-  print("mouseX is: ");
-  print(mouseX);
-  print(", mouseY is: ");
-  print(mouseY);
 
   for (let cloud of clouds)
   {
