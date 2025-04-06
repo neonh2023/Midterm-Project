@@ -114,7 +114,7 @@ function draw()
   {
     currentTime2 = 0;
     let velocity = createVector(int(random(-1,-3)), 0);
-    let location = createVector(1300, int(random(0, 250)));
+    let location = createVector(1300, int(random(0, 200)));
     let o = int(random(1,4));
     clouds.push(new Cloud(location, velocity, o));
   }
